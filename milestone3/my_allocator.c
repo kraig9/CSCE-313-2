@@ -38,6 +38,8 @@ FL_HEADER* free_list1;
 
 static char* first;
 static int remaining;
+int array_size;
+FL_HEADER** lists;
 
 double round_up;
 double base;
@@ -57,13 +59,13 @@ uintptr_t mem_start;
 
 unsigned int init_allocator(unsigned int _basic_block_size, 
 			    unsigned int _length){
-    int i=0;
+    array_size = 0;
     while (_length!=_basic_block_size){
         _length=_length/2;
-        i++;
+        array_size++;
     }
 	first=(char*)malloc(_length); //free mem
-    FL_HEADER** lists=(FL_HEADER**) malloc((i*sizeof(FL_HEADER*)));
+    lists=(FL_HEADER**) malloc((array_size*sizeof(FL_HEADER*)));
     
 	free_list1=(FL_HEADER*)first;
 	remaining=_length;
@@ -86,6 +88,18 @@ Addr my_malloc(size_t _length) {
      the C standard library! 
      Of course this needs to be replaced by your implementation.
   */
+    FL_HEADER* it;
+    for(int i=0;i<array_size;i++){
+        it=lists[i];
+        if(_length < it->length){
+            break;
+        }
+        it=it->next;
+    }
+    FL_remove(<#FL_HEADER *free_list#>, <#FL_HEADER *block#>){
+        
+    }
+    
   FL_HEADER* temp=free_list1;
   while(temp->length < _length && temp != NULL){
 	  temp=temp->next;
