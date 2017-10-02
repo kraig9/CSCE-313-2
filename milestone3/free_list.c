@@ -3,27 +3,27 @@ FL_HEADER* FL_remove(FL_HEADER * free_list, FL_HEADER  * block){
 	FL_HEADER * temp=free_list;
 	
 	//search for block that matches
-	while(temp!=nullptr){
+	while(temp!=NULL){
 		if(temp==block){
 			//if found at beginning
-			if(temp->prev==nullptr){
+			if(temp->prev==NULL){
 				free_list=block->next;
-				free_list->prev=nullptr;
-				block->next=nullptr;
+				free_list->prev=NULL;
+				block->next=NULL;
 				return free_list;
 			}
 		//if in the middle
-		else if(temp->next!=nullptr&&temp->prev!=nullptr){
+		else if(temp->next!=NULL&&temp->prev!=NULL){
 			block->next->prev=block->prev;
 			block->prev->next=block->next;
-			block->next=nullptr;
-			block->prev=nullptr;
+			block->next=NULL;
+			block->prev=NULL;
 			return free_list;
 			}
 			//if at end
 		else{
-			block->prev->next=nullptr;
-			block->prev=nullptr;
+			block->prev->next=NULL;
+			block->prev=NULL;
 			return free_list;
 			}
 		}
@@ -34,7 +34,7 @@ FL_HEADER* FL_remove(FL_HEADER * free_list, FL_HEADER  * block){
 }
 
 FL_HEADER* FL_add(FL_HEADER * free_list, FL_HEADER * block){
-	block->prev=nullptr;
+	block->prev=NULL;
 	block->next=free_list;
 	free_list->prev=block;
 	free_list=block;

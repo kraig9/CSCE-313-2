@@ -57,21 +57,21 @@ uintptr_t mem_start;
 
 unsigned int init_allocator(unsigned int _basic_block_size, 
 			    unsigned int _length){
-	//Want to iterate until remains == 0
-	unsigned int remains = _length % _basic_block_size;
-	unsigned int remain_total = _length - remains;
-	if (remainder != 0){
-		remain_total = remain_total + _basic_block_size;
-	}
-	_length=remain_total;
-	list_size
-	first=(char*)malloc(_length);
+    int i=0;
+    while (_length!=_basic_block_size){
+        _length=_length/2;
+        i++;
+    }
+	first=(char*)malloc(_length); //free mem
+    FL_HEADER** lists=(FL_HEADER**) malloc((i*sizeof(FL_HEADER*)));
+    
 	free_list1=(FL_HEADER*)first;
 	remaining=_length;
 	free_list1->length=_length;
-	free_list1->next=nullptr;
-	free_list1->prev=nullptr;
-	
+	free_list1->next=NULL;
+	free_list1->prev=NULL;
+    lists[0]=free_list1;
+
 	//if error, return 0
 	return 0;
 }
@@ -87,7 +87,7 @@ Addr my_malloc(size_t _length) {
      Of course this needs to be replaced by your implementation.
   */
   FL_HEADER* temp=free_list1;
-  while(temp->length < _length && temp != nullptr){
+  while(temp->length < _length && temp != NULL){
 	  temp=temp->next;
   }
   if(temp==0){

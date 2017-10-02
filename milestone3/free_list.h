@@ -4,8 +4,8 @@
 
 typedef struct fl_header{
 	int length;
-	fl_header* next;
-	fl_header* prev;
+	struct fl_header* next;
+	struct fl_header* prev;
 } FL_HEADER;
 
 FL_HEADER* FL_remove(FL_HEADER * free_list, FL_HEADER  * block);
