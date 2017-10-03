@@ -43,7 +43,6 @@ FL_HEADER** lists;
 
 double round_up;
 double base;
-uintptr_t mem_start;
 
 /*--------------------------------------------------------------------------*/
 /* FORWARDS */
@@ -96,22 +95,7 @@ Addr my_malloc(size_t _length) {
         }
         it=it->next;
     }
-    FL_remove(<#FL_HEADER *free_list#>, <#FL_HEADER *block#>){
-        
-    }
-    
-  FL_HEADER* temp=free_list1;
-  while(temp->length < _length && temp != NULL){
-	  temp=temp->next;
-  }
-  if(temp==0){
-	  printf("out of memory");
-	  return 0;
-  }
-  if(temp->length >= _length){
-	  FL_remove(free_list1,temp);
-  }
-  remaining-=_length;
+    FL_remove(i,it);
 }
 
 int my_free(Addr _a) {
